@@ -99,6 +99,7 @@ public class BiobuzzTeleopV4 extends OpMode {
 boolean firstLoop = true;
 Pose2D bluePos;
     Pose2D redPos;
+    MatchLog log;   // match recorder (read only): /sdcard/FIRST/matchlogs
 
 
  //   boolean AllianceIsRed = false;
@@ -185,6 +186,7 @@ Pose2D bluePos;
         runTime.reset();
         bluePos = new Pose2D(DistanceUnit.INCH,-bio.odo.getPosition().getX(DistanceUnit.INCH)+6,-bio.odo.getPosition().getY(DistanceUnit.INCH)+9,(AngleUnit.DEGREES),(bio.odo.getPosition().getHeading(AngleUnit.DEGREES)+176)%360);
         redPos = bio.odo.getPosition();
+        log = new MatchLog(hardwareMap, gamepad1, gamepad2, "teleop");   // match recorder (read only)
             }
 
     public void init_loop() {
@@ -471,11 +473,25 @@ if (gamepad1.xWasPressed()){}
         telemetry.update();
 
         //endregion
+        if (log != null) {   // match recorder (read only)
+            log.put("target_rpm", bio.targetFlywheelSpeed);
+            log.put("dist_in", bio.distToGoalTot);
+            log.put("offset_dist_in", bio.offsetf);
+            log.put("offset_turret_deg", bio.offsett);
+            log.put("aiming", bio.tTracking ? 1 : 0);
+            log.put("red", "Red".equals(bio.teamColor) ? 1 : 0);
+            log.row();
+        }
 
 
 
 
 
+    }
+
+    @Override
+    public void stop() {   // match recorder (read only): writes its file
+        if (log != null) log.close();
     }
 }
 // end class
