@@ -12,7 +12,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +31,8 @@ import java.util.Locale;
  * update() (memory only); the hood and turret positions your code set (the SDK answers from memory); both gamepads; your
  * put() numbers; and the flywheel's speed: the ONLY hub read (one bulk read, about 2 ms, at most every 40 ms).
  * The rows stay in memory (room for 10 minutes, 6.6 MB, reserved at init, so nothing grows while you drive); close() writes one
- * CSV file on its own thread after the op mode: /sdcard/FIRST/matchlogs/<date-time>_<label>.csv on the Control Hub.
+ * CSV file on its own thread after the op mode: /sdcard/FIRST/matchlogs/<date-time>_<label>.csv on the Control Hub (never
+ * overwriting a file: a name already there gets -2, -3; forced onto the storage, so switching off right after is safe).
  * The Pinpoint is the GoBildaPinpointDriver class in this package (the team's own copy of goBILDA's driver).
  */
 public class MatchLog {
@@ -122,15 +125,21 @@ public class MatchLog {
         closed = true;
         on = false;
         try {
-            final File f = new File(new File(AppUtil.FIRST_FOLDER, "matchlogs"), started + "_" + label + ".csv");
+            final String base = started + "_" + label;
             final String top = "# MatchLog " + label + " started " + started + ", " + n + " rows" + note + "\n" + head + "\n";
             new Thread(new Runnable() {
                 @Override public void run() {
                     try {
-                        f.getParentFile().mkdirs();
-                        FileWriter out = new FileWriter(f);
+                        File dir = new File(AppUtil.FIRST_FOLDER, "matchlogs");
+                        dir.mkdirs();
+                        File f = new File(dir, base + ".csv");
+                        for (int k = 2; !f.createNewFile() && k < 100; k++) f = new File(dir, base + "-" + k + ".csv");   // never overwrite a file
+                        FileOutputStream fo = new FileOutputStream(f);
+                        Writer out = new OutputStreamWriter(fo, "UTF-8");
                         out.write(top);
                         out.write(rows.toString());
+                        out.flush();
+                        fo.getFD().sync();   // on the storage now: safe if the robot is switched off right after the match
                         out.close();
                     } catch (Throwable ignored) {
                         // never disturb the robot
