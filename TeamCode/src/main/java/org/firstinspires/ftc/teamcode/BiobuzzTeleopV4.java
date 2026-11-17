@@ -372,7 +372,14 @@ if (gamepad1.xWasPressed()){}
         }
         if (bio.tTracking){
             bio.turret.setPosition(bio.tTarget( ((bio.tAng(bio.turret.getPosition()))) , bio.odo.getPosition(), bio.goal, bio.offsett, bio.side));
-            bio.flywheel.setVelocity(bio.targetFlywheelSpeed / 60 * 28);
+
+            if (bio.distToGoalTot<35){
+                bio.flywheel.setVelocity((bio.targetFlywheelSpeed-35) / 60 * 28);
+
+            }else {
+                bio.flywheel.setVelocity(bio.targetFlywheelSpeed / 60 * 28);
+
+            }
             bio.hood.setPosition(bio.targetHoodAngle);
             gamepad2.rumble(Gamepad.RUMBLE_DURATION_CONTINUOUS);
 

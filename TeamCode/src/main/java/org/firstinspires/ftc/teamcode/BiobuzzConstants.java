@@ -17,6 +17,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 
 public class BiobuzzConstants {
 
+    //TEST COMMENT FOR GITHUB
+
     //region - Hardware
     DcMotorEx intakef;
     CRServo intakeb;
@@ -68,7 +70,7 @@ public class BiobuzzConstants {
 
     double targetFlywheelSpeed = 0;
 
-    double flywheelautostart = 2575.0 / 60 * 28;
+    double flywheelautostart = 2475.0 / 60 * 28;
 
 
     String side = "Audience";
@@ -142,6 +144,34 @@ public class BiobuzzConstants {
 
     Position usePos = new Position(DistanceUnit.INCH, 0, 0, 0, 0);
 
+    //red meet 1 poses
+
+    Pose2D startPoseR = new Pose2D(DistanceUnit.INCH, -10, -64, AngleUnit.DEGREES, 90);
+    Pose2D intakePreLineR = new Pose2D(DistanceUnit.INCH, -56.5, -42, AngleUnit.DEGREES, 180);
+    Pose2D intakePostLineR = new Pose2D(DistanceUnit.INCH, -56.5, -45, AngleUnit.DEGREES, 180);
+    Pose2D intakeLineR = new Pose2D(DistanceUnit.INCH, -56.5, -54, AngleUnit.DEGREES, 180);
+    Pose2D parkWaypointR = new Pose2D(DistanceUnit.INCH, -39, -31.5, AngleUnit.DEGREES, 180);
+    Pose2D parkPosR = new Pose2D(DistanceUnit.INCH, -52, 28, AngleUnit.DEGREES, 180);
+    Pose2D intakeLineSideR = new Pose2D(DistanceUnit.INCH, -55.5, -64, AngleUnit.DEGREES, 90);
+    Pose2D intakeLineSideWaypointR = new Pose2D(DistanceUnit.INCH, -48, -60, AngleUnit.DEGREES, 45);
+
+    //blue meet 1 poses (red inversed, untested) all pos to neg and vide versa, rotated 180 deg
+
+    Pose2D startPoseB = new Pose2D(DistanceUnit.INCH, 10, 64, AngleUnit.DEGREES, -90);
+    Pose2D intakePreLineB = new Pose2D(DistanceUnit.INCH, 56.5, 42, AngleUnit.DEGREES, 0);
+    Pose2D intakePostLineB = new Pose2D(DistanceUnit.INCH, 56.5, 45, AngleUnit.DEGREES, 0);
+    Pose2D intakeLineB = new Pose2D(DistanceUnit.INCH, 56.5, 54, AngleUnit.DEGREES, 0);
+    Pose2D parkWaypointB = new Pose2D(DistanceUnit.INCH, 39, 31.5, AngleUnit.DEGREES, 0);
+    Pose2D parkPosB = new Pose2D(DistanceUnit.INCH, 52, -28, AngleUnit.DEGREES, 0);
+    Pose2D intakeLineSideB = new Pose2D(DistanceUnit.INCH, 55.5, 64, AngleUnit.DEGREES, -90);
+    Pose2D intakeLineSideWaypointB = new Pose2D(DistanceUnit.INCH, 48, 60, AngleUnit.DEGREES, -135);
+
+
+
+
+
+
+
     //endregion
 
     //region - Turret
@@ -153,7 +183,7 @@ public class BiobuzzConstants {
     double tn90 = .353;
     double tn180 = .182;
 
-    double turretautostart = 0.00175667 * 92 + 0.5022;
+    double turretautostart = 0.00175667 * 94 + 0.5022;
 
     double offsett = 0;
 
