@@ -221,7 +221,7 @@ if (firstLoop){
     firstLoop = false;
     bio.turret.setPosition(bio.t0);
 }
-        // region Team Color
+        // region - Team Color
 
         if (gamepad1.a){
             bio.teamColor = "Red";
@@ -231,6 +231,7 @@ if (firstLoop){
 
         //endregion
 
+        //region - Corner Relocalize
         if (gamepad1.xWasPressed()){
 
             if (bio.teamColor == "Red") { //CHANGE
@@ -241,6 +242,7 @@ if (firstLoop){
             }
 
         }
+        //endregion
 
         //region - Odo
 
@@ -255,6 +257,7 @@ if (gamepad1.xWasPressed()){}
 
         //endregion
 
+        //region - Limelight
             /*
 
             if (result != null && result.isValid()) {
@@ -266,6 +269,7 @@ if (gamepad1.xWasPressed()){}
                     telemetry.addData("Bearing (tx)", "%.2f degrees", bearing);
                 }
             }*/
+        //endregion
 
         //region - Driving
         x = gamepad1.left_stick_x;
@@ -439,7 +443,7 @@ if (gamepad1.xWasPressed()){}
         bio.targetHoodAngle = bio.interpolateHood(bio.distToGoalTot + bio.offsetf);
 //endregion
 
-        //region Offsets
+        //region - Offsets
 
         if (gamepad2.dpadUpWasPressed()){
             bio.offsetf = bio.offsetf + 1;
@@ -480,6 +484,8 @@ if (gamepad1.xWasPressed()){}
         telemetry.update();
 
         //endregion
+
+        //region - Logs
         if (log != null) {   // match recorder (read only)
             log.put("target_rpm", bio.targetFlywheelSpeed);
             log.put("dist_in", bio.distToGoalTot);
@@ -489,6 +495,7 @@ if (gamepad1.xWasPressed()){}
             log.put("red", "Red".equals(bio.teamColor) ? 1 : 0);
             log.row();
         }
+        //endregion
 
 
 

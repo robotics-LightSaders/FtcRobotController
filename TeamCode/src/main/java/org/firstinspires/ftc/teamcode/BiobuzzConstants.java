@@ -17,7 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 
 public class BiobuzzConstants {
 
-    //TEST COMMENT FOR GITHUB TWO
+
 
     //region - Hardware
     DcMotorEx intakef;
@@ -57,8 +57,7 @@ public class BiobuzzConstants {
 
     //endregion
 
-
-    //region - flywheel
+    //region - Flywheel
 
     public static PIDFCoefficients PIDF = new PIDFCoefficients(160, 0, 0, 15.2); //adjust/tune these
 //was 67
@@ -130,7 +129,6 @@ public class BiobuzzConstants {
     }
     //endregion
 
-
     //region - Auto Positions
 
     Pose2D redGoalAud = new Pose2D(DistanceUnit.INCH, -10, -21, AngleUnit.DEGREES, 0);
@@ -155,7 +153,7 @@ public class BiobuzzConstants {
     Pose2D intakeLineSideR = new Pose2D(DistanceUnit.INCH, -55.5, -64, AngleUnit.DEGREES, 90);
     Pose2D intakeLineSideWaypointR = new Pose2D(DistanceUnit.INCH, -48, -60, AngleUnit.DEGREES, 45);
 
-    //blue meet 1 poses (red inversed, untested) all pos to neg and vide versa, rotated 180 deg
+    //blue meet 1 poses (red inversed, untested) all pos to neg and vice versa, rotated 180 deg
 
     Pose2D startPoseB = new Pose2D(DistanceUnit.INCH, 10, 64, AngleUnit.DEGREES, -90);
     Pose2D intakePreLineB = new Pose2D(DistanceUnit.INCH, 56.5, 42, AngleUnit.DEGREES, 0);
@@ -239,7 +237,7 @@ public class BiobuzzConstants {
 
     //endregion
 
-    //region Hood
+    //region - Hood
 
     double targetHoodAngle;
 
@@ -249,7 +247,7 @@ public class BiobuzzConstants {
 
     //endregion
 
-
+    //region - Publics General
     public void configureOdo(boolean reset) {
         double xodooffset = 75; //calculate these sometime
         double yodooffset = 0;
@@ -277,6 +275,12 @@ public class BiobuzzConstants {
         double gdy = g.getY(DistanceUnit.INCH) - pos.getY(DistanceUnit.INCH);
         return Math.sqrt(Math.pow(gdx, 2) + Math.pow(gdy, 2));
     }
+    public void transfer (){
+        transfer.setPower(1);
+        intakef.setPower(1);
+        intakeb.setPower(1);
+    }
+    //endregion
 
 
 
