@@ -203,6 +203,7 @@ public class BioAutoMeetOne extends LinearOpMode {
         bio.intakef.setPower(1);
         bio.intakeb.setPower(0);
         sleep(3000);
+
         bio.transfer.setPower(0);
         bio.intakeb.setPower(-1);
         bio.intakef.setPower(0);
